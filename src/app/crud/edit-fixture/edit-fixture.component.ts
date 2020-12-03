@@ -23,10 +23,10 @@ user: firebase.User
   private auth: AuthService) { }
 
   ngOnInit(): void {
-    this.updateFixtureData();   // Call updateStudentData() as soon as the component is ready 
-    const id = this.actRoute.snapshot.paramMap.get('id');  // Getting current component's id or information using ActivatedRoute service
+    this.updateFixtureData();   
+    const id = this.actRoute.snapshot.paramMap.get('id');  
     this.crudApi.GetFixture(id).valueChanges().subscribe(data => {
-      this.editForm.setValue(data)  // Using SetValue() method, It's a ReactiveForm's API to store intial value of reactive form 
+      this.editForm.setValue(data)  
     });
     this.auth.getUserState()
       .subscribe(user => {
@@ -51,9 +51,9 @@ user: firebase.User
     get amountPaid() {
     return this.editForm.get('amountPaid');
     }
-  get createdBy() {
-    return this.editForm.get('createdBy');
-  }
+   get courtNo() {
+    return this.editForm.get('courtNo');
+    }
 
 
   
@@ -65,7 +65,7 @@ user: firebase.User
       fixtureLocation: [''],
       courtFeesPaidBy: [''],
       amountPaid: [''],
-      createdBy:['']
+      courtNo: ['']
     })
   }
 
@@ -76,9 +76,9 @@ user: firebase.User
 
   // Below methods fire when somebody click on submit button
   updateForm(){
-    this.crudApi.UpdateFixture(this.editForm.value);       // Update student data using CRUD API
-    this.toastr.success(this.editForm.controls['fixtureLocation'].value + ' updated successfully');   // Show succes message when data is successfully submited
-    this.router.navigate(['view-students']);               // Navigate to student's list page when student data is updated
+    this.crudApi.UpdateFixture(this.editForm.value);       
+    this.toastr.success(this.editForm.controls['fixtureLocation'].value + ' updated successfully');  
+    this.router.navigate(['fixture-list']);               
   }
 
 

@@ -48,7 +48,7 @@ export class AuthService {
       })
       .then(userCredential => {
         if (userCredential) {
-          this.router.navigate(['/add-fixture']);
+          this.router.navigate(['/fixture-list']);
           this.toastr.success("Welcome" + " " + userCredential.user.displayName + "!")
         }
       } )
@@ -60,13 +60,13 @@ export class AuthService {
         this.newUser = user;
 
         userCredential.user.updateProfile({
-          displayName: user.firstName + ' ' + user.lastName + ' ' + (user.role)
+          displayName: user.firstName + ' ' + user.lastName
         });
 
         this.insertUserData(userCredential);
         this.toastr.success("Welcome to the fixture app!")
         this.toastr.success("User successfully created!")
-        this.router.navigate(['/add-fixture']);
+        this.router.navigate(['/fixture-list']);
         
         
       })
@@ -82,7 +82,6 @@ export class AuthService {
       email: this.newUser.email,
       firstname: this.newUser.firstName,
       lastname: this.newUser.lastName,
-      role: this.newUser.role
 
     })
   }
@@ -96,7 +95,7 @@ async googleSignin() {
     const credential = await this.afAuth.auth.signInWithPopup(provider);
     return this.updateUserData(credential.user)
       .then(() => {
-        this.router.navigate(['/add-fixture']);
+        this.router.navigate(['/fixture-list']);
         this.toastr.success("Welcome" + " " + credential.user.displayName + "!")
       });
   }

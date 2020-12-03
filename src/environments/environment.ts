@@ -5,14 +5,13 @@
 export const environment = {
   production: false,
    firebase: {
-      apiKey: "AIzaSyCIKv71vwMpWIiElbQUwkp3ukSPSA1pQ88",
-      authDomain: "challenge-prac.firebaseapp.com",
-      databaseURL: "https://challenge-prac.firebaseio.com",
-      projectId: "challenge-prac",
-      storageBucket: "challenge-prac.appspot.com",
-      messagingSenderId: "494711005938",
-      appId: "1:494711005938:web:51ceff6f581e86aca5266b",
-      measurementId: "G-3SCEYDXM7H"
+      apiKey: "AIzaSyBjC62Ni-A3j4_jqZVjB0FvFY97IRjkOhY",
+    authDomain: "challenge-final-9d648.firebaseapp.com",
+    projectId: "challenge-final-9d648",
+    storageBucket: "challenge-final-9d648.appspot.com",
+    messagingSenderId: "505960883729",
+    appId: "1:505960883729:web:85effc87a2abd6428933b0",
+    measurementId: "G-L0YH4H7YXW"
     }
 };
 

@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/auth/auth.service';
 import { CrudService } from '../crud.service';
+import * as firbase from 'firebase/app';
+import "firebase/auth"
+import "firebase/firestore"
+
 interface Fixture {
     $key: string;
     fixtureTime: string;
@@ -10,6 +14,7 @@ interface Fixture {
   courtFeesPaidBy: string;
   amountPaid: string;
   createdBy: string;
+  courtNo: string;
  }
 @Component({
   selector: 'app-fixture-list',
@@ -18,20 +23,22 @@ interface Fixture {
 })
 export class FixtureListComponent implements OnInit {
 p: number = 1;
-  user: firebase.User;                 // Settup up pagination variable
-  Fixture: Fixture[];                 // Save students data in Student's array.
-  hideWhenNoFixture: boolean = false; // Hide students data table when no student.
-  noData: boolean = false;            // Showing No Student Message, when no student in database.
-  constructor(public crudApi: CrudService, // Inject student CRUD services in constructor.
+  user: firebase.User;    
+  public isAdmin = false;
+   public isTeamMember = false;
+  Fixture: Fixture[];                 
+  hideWhenNoFixture: boolean = false; 
+  noData: boolean = false;            
+  constructor(public crudApi: CrudService, 
     public toastr: ToastrService,
   private auth: AuthService,) { }
 
   
    
   ngOnInit(): void {
-    this.dataState(); // Initialize student's list, when component is ready
+    this.dataState(); 
     let s = this.crudApi.GetFixturesList(); 
-    s.snapshotChanges().subscribe(data => { // Using snapshotChanges() method to retrieve list of data along with metadata($key)
+    s.snapshotChanges().subscribe(data => { 
       this.Fixture = [];
       data.forEach(item => {
         let a = item.payload.toJSON(); 
@@ -42,9 +49,34 @@ p: number = 1;
     this.auth.getUserState()
       .subscribe(user => {
         this.user = user;
-    })
+      })
+    firbase.auth().onAuthStateChanged(user => {
+       if (user) {
+         firbase
+           .firestore()
+           .doc(`Users/${user.uid}`)
+           .get()
+           .then(userProfileSnapshot => {
+             this.isAdmin = userProfileSnapshot.data().isAdmin;
+             
+         })
+       }
+     })
+    
+  firbase.auth().onAuthStateChanged(user => {
+       if (user) {
+         firbase
+           .firestore()
+           .doc(`Users/${user.uid}`)
+           .get()
+           .then(userProfileSnapshot => {
+             this.isTeamMember = userProfileSnapshot.data().isTeamMember;
+             
+         })
+       }
+     })
   }
-  // Using valueChanges() method to fetch simple list of students data. It updates the state of hideWhenNoStudent, noData variables when any changes occurs in student data list in real-time.
+  
   dataState() {     
     this.crudApi.GetFixturesList().valueChanges().subscribe(data => {
       
@@ -58,11 +90,11 @@ p: number = 1;
     })
   }
 
-  // Method to delete student object
+  
   deleteFixture(fixture) {
-    if (window.confirm('Are sure you want to delete this Fixture ?')) { // Asking from user before Deleting student data.
-      this.crudApi.DeleteFixture(fixture.$key) // Using Delete student API to delete student.
-      this.toastr.success(fixture.fixtureLocation + ' successfully deleted!'); // Alert message will show up when student successfully deleted.
+    if (window.confirm('Are sure you want to delete this Fixture?')) { 
+      this.crudApi.DeleteFixture(fixture.$key) 
+      this.toastr.success(fixture.fixtureLocation + ' successfully deleted!'); 
     }
   }
 

@@ -5,5 +5,5 @@ export interface Fixture {
     fixtureLocation: string;
     courtFeesPaidBy: string;
     amountPaid: string;
-    createdBy: string;
+    courtNo: string;
  }

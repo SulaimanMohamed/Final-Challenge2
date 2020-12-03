@@ -22,7 +22,7 @@ fixturesRef: AngularFireList<any>;
   public fb: FormBuilder,
     public toastr: ToastrService,) { }
 
-  // Create Student
+ 
   AddFixture(fixture: Fixture) {
     this.fixturesRef.push({
       fixtureTime: fixture.fixtureTime,
@@ -30,7 +30,7 @@ fixturesRef: AngularFireList<any>;
       fixtureLocation: fixture.fixtureLocation,
       courtFeesPaidBy: fixture.courtFeesPaidBy,
       amountPaid: fixture.amountPaid,
-      createdBy: fixture.createdBy
+      courtNo: fixture.courtNo
 
     })
   }
@@ -46,7 +46,7 @@ fixturesRef: AngularFireList<any>;
     return this.fixturesRef;
   }  
 
-  // Update Student Object
+  
   UpdateFixture(fixture: Fixture) {
     this.fixtureRef.update({
       fixtureTime: fixture.fixtureTime,
@@ -54,11 +54,12 @@ fixturesRef: AngularFireList<any>;
       fixtureLocation: fixture.fixtureLocation,
       courtFeesPaidBy: fixture.courtFeesPaidBy,
       amountPaid: fixture.amountPaid,
-      createdBy: fixture.createdBy
+      courtNo: fixture.courtNo
+    
     })
   }  
 
-  // Delete Student Object
+  
   DeleteFixture(id: string) { 
     this.fixtureRef = this.db.object('fixtures-list/'+id);
     this.fixtureRef.remove();

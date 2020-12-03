@@ -9,18 +9,13 @@
             </div>
         </div>
     </div>
-
-
     <div class="row">
         <div class="col-lg-12">
             <div class="pricing-header form-block mx-auto">
-
-                <!-- Student's Edit Form -->
                 <form [formGroup]="editForm" (ngSubmit)="updateForm()" novalidate>
                     <div class="row">
                         <div class="col-lg-5 col-md-12 col-sm-12">
                             <div class="row">
-
                                 <div class="col-md-12 mb-3">
                                     <label>Time</label>
                                     <input type="time" formControlName="fixtureTime" class="form-control" required
@@ -30,9 +25,7 @@
                                         <sup>*</sup>Please
                                         provide time
                                     </p>
-
                                 </div>
-
                                 <div class="col-md-12 mb-3">
                                     <label>Date</label>
                                     <input type="Date" formControlName="fixtureDate" class="form-control" required
@@ -54,6 +47,10 @@
                                         Location</p>
                                 </div>
                                 <div class="col-md-12 mb-3">
+                                    <label>Court No.</label>
+                                    <input type="text" formControlName="courtNo" class="form-control" required readonly>
+                                </div>
+                                <div class="col-md-12 mb-3">
                                     <label>Court Fees Paid By</label>
                                     <input type="text" formControlName="courtFeesPaidBy" class="form-control" required>
                                 </div>
@@ -61,12 +58,6 @@
                                     <label>Amount Paid</label>
                                     <input type="text" formControlName="amountPaid" class="form-control" required>
                                 </div>
-                                <div class="col-md-12 mb-3">
-                                    <label>Created by</label>
-
-                                    <input type="text" formControlName="createdBy" class="form-control" readonly>
-                                </div>
-
                             </div>
                             <div class="form-group text-right">
                                 <button type="submit" class="btn btn-success btn-block" [disabled]="!editForm.valid">
@@ -76,8 +67,6 @@
                         </div>
                     </div>
                 </form>
-                <!-- Student's Edit Form ends-->
-
             </div>
         </div>
     </div>

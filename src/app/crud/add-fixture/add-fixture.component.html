@@ -1,10 +1,10 @@
-<div *ngIf="user">
+<div *ngIf="isAdmin">
     <div>
         <div class="pt-3 pb-2 mb-3 border-bottom">
             <h1 class="h2">Add Fixture</h1>
         </div>
 
-        <!-- Student form -->
+
         <form [formGroup]="fixtureForm" (ngSubmit)="submitStudentData()" novalidate>
             <div class="row">
                 <div class="col-lg-5 col-md-12 col-sm-12">
@@ -22,7 +22,7 @@
 
                         <div class="col-md-12 mb-3">
                             <label>Date</label>
-                            <input type="Date" min="2020-12-01" formControlName="fixtureDate" class="form-control"
+                            <input type="Date" min="2020-12-04" formControlName="fixtureDate" class="form-control"
                                 required>
                             <!-- Showing errors using getter method -->
                             <p *ngIf="fixtureDate.touched && fixtureDate.invalid" class="error"><sup>*</sup>Please
@@ -39,16 +39,16 @@
                                 Location</p>
                         </div>
                         <div class="col-md-12 mb-3">
+                            <label>Court No.</label>
+                            <input type="text" formControlName="courtNo" class="form-control" required>
+                        </div>
+
+                        <div class="col-md-12 mb-3">
                             <input type="hidden" formControlName="courtFeesPaidBy" class="form-control">
                         </div>
                         <div class="col-md-12 mb-3">
 
                             <input type="hidden" formControlName="amountPaid" class="form-control">
-                        </div>
-                        <div class="col-md-12 mb-3">
-
-                            <input type="text" formControlName="createdBy" class="form-control" id="createdBy"
-                                autocomplete="off">
                         </div>
 
                     </div>
@@ -60,6 +60,6 @@
 
                 </div>
             </div>
-        </form><!-- Student form ends-->
+        </form>
     </div>
 </div>
